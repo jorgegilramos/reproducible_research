@@ -64,6 +64,7 @@ median(steps_by_day$total_steps)
 
 ```{r}
 steps_by_interval <- ddply(df_activity, .(interval), summarize, total_steps = sum(steps), average_steps = mean(steps))
+colnames(steps_by_interval)
 plot(total_steps ~ interval, type = "l", data = steps_by_interval, ylab = "steps", main = "Steps by interval", col = "red")
 ```
 
@@ -89,8 +90,8 @@ sum(is.na(df_activity_complete))
    example, you could use the mean/median for that day, or the mean
    for that 5-minute interval, etc.
 
-My solution is to use the means for the 5-minute intervals as fillers for missing
-values.
+**My solution is to use the means for the 5-minute intervals as fillers**
+**for missing values.**
 
 3. Create a new dataset that is equal to the original dataset but with
    the missing data filled in.
@@ -111,14 +112,15 @@ steps_by_day_filled <- ddply(df_activity_filled, .(date), summarize, total_steps
 hist(steps_by_day_filled$total_steps, xlab = "steps", main = "Steps by day")
 ```
 
-Means are equal in both cases and the median completing NAs, now tends logically to the mean.
+**Means are equal in both cases and the median completing NAs, now tends logically to the mean.**
+
 ```{r}
 mean(steps_by_day_filled$total_steps)
 median(steps_by_day_filled$total_steps)
 ```
 
-The impact of the missing data seems rather low, at least when
-estimating the total number of steps per day.
+**My conclusion is that just to analyze the number of steps by day the**
+**missing data doesn't seem to affect in a sensitive way.**
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
@@ -162,3 +164,6 @@ par(mfrow = c(2,1))
 plot(total_steps ~ interval, type = "l", data = steps_by_interval_filled_weekday, main = "Weekday", ylab = "steps", col = "red")
 plot(total_steps ~ interval, type = "l", data = steps_by_interval_filled_weekend, main = "Weekend", ylab = "steps", col = "red")
 ```
+
+**Not many differences in the activity patterns between weekdays and**
+**weekends. On weekend the subject seem to have more activity.**
